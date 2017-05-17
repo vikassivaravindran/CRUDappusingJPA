@@ -1,0 +1,50 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('org.cloudfoundry:cf-gradle-plugin:1.0.4')
+	}
+	}
+
+	apply plugin : 'cloudfoundry'
+	apply plugin: 'java'
+	apply plugin: 'eclipse-wtp'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'war'
+
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = 1.8
+
+	repositories {
+	mavenCentral()
+	}
+	
+	
+	cloudfoundry{
+	target = 'https://api.ng.bluemix.net'
+	space = 'development'
+	username = 'vikassivaravindran@gmail.com'
+	password = 'Sr@311094'
+	}
+
+	configurations {
+	providedRuntime
+	}
+
+	dependencies {
+	
+	
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('io.springfox:springfox-swagger2:2.6.1')
+	compile('io.springfox:springfox-swagger-ui:2.6.1')
+	compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.3.RELEASE' 
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+	
